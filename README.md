@@ -7,7 +7,7 @@
 [![Infrastructure: Kubernetes & Docker](https://img.shields.io/badge/Deployment-Kubernetes%20%7C%20Canary-326CE5?style=flat-square&logo=kubernetes&logoColor=white)](https://kubernetes.io/)
 
 > **Engineered & Architected by [Ethern-Myth](https://github.com/Ethern-Myth)**  
-> *A high-performance enterprise operations management platform built with uncompromising architectural rigor, zero-trust security, and cloud-native resilience.*
+> *A production-oriented enterprise operations management system built to demonstrate architectural rigor, security engineering, and cloud-native resilience.*
 
 ![Login Screenshot](screenshots/login.png)
 
@@ -17,9 +17,11 @@
 
 ## Executive Summary
 
-**OpsHub** is a production-grade operations management ecosystem engineered for modern enterprise scale. Conceived and architected from day one to eliminate operational friction, OpsHub pairs an ultra-responsive, signal-driven **Angular** frontend with a high-throughput, modular **.NET** backend running on **SQL Server**.
+**OpsHub** is a production-oriented operations management system engineered as a practical demonstration of modern enterprise engineering. Conceived and architected around the concerns a system would face as it grows, OpsHub pairs an ultra-responsive, signal-driven **Angular** frontend with a high-throughput, modular **.NET** backend running on **SQL Server**.
 
-Every tier of OpsHub demonstrates architectural maturity: from strict Clean Architecture boundaries and dynamic role-based access control (RBAC), to end-to-end Cross-Site Request Forgery (CSRF) defense, distributed cryptographic key persistence, and automated Kubernetes canary delivery.
+Every tier of OpsHub demonstrates architectural maturity: from strict Clean Architecture boundaries and dynamic role-based access control (RBAC), to end-to-end Cross-Site Request Forgery (CSRF) defense, distributed cryptographic key persistence, and Kubernetes canary deployment configuration.
+
+> **Project intent:** OpsHub is intentionally not presented as a hosted SaaS product or as evidence of live production traffic. It is a source-first engineering system built to make its design decisions inspectable: from application boundaries and security controls to Docker and Kubernetes operational configuration.
 
 ---
 
@@ -89,7 +91,7 @@ Rather than relying on static, compile-time roles, OpsHub implements a dynamic, 
 
 ## Cloud-Native Infrastructure & Canary Deployments
 
-OpsHub is designed for high availability and zero-downtime progressive rollouts:
+OpsHub is designed to demonstrate high-availability patterns and zero-downtime progressive rollout strategies:
 
 ```
                             [ Ingress Controller ]
@@ -100,7 +102,7 @@ OpsHub is designed for high availability and zero-downtime progressive rollouts:
              [ Production: v1 ]                 [ Canary: v2 ]
 ```
 
-* **Zero-Downtime Traffic Splitting**: Production Kubernetes ingress configurations define explicit canary rules (`canary-weight: "10"`), allowing new versions to be safely validated against production workloads before full promotion.
+* **Zero-Downtime Traffic Splitting**: Kubernetes ingress configurations define explicit canary rules (`canary-weight: "10"`), allowing a new version to be progressively introduced and evaluated before full promotion.
 * **State & Data Protection Decoupling**: Persistent Volume Claims (PVC) isolate stateful cryptographic keys and mail storage from ephemeral application pods.
 * **Automated Reverse Proxy & SSL**: NGINX acts as the unified reverse proxy, managing HTTPS termination, header forwarding, and proxy contracts between client and API containers.
 
@@ -116,7 +118,7 @@ opshub/
 │   │   │   ├── core/                  # Interceptors, guards, stores, API clients
 │   │   │   ├── features/              # Self-contained domain modules
 │   │   │   │   ├── auth/              # Authentication & registration workflows
-│   │   │   │   ├── dashboard/         # Real-time analytics & telemetry
+│   │   │   │   ├── dashboard/         # Operational analytics & dashboard views
 │   │   │   │   ├── customers/         # Customer lifecycle management
 │   │   │   │   ├── projects/          # Project tracking & delivery
 │   │   │   │   ├── tasks/             # Task scheduling & workflows
@@ -175,7 +177,7 @@ npm start
 *Web dashboard will be accessible at: `https://localhost:4200/`*
 
 ### 4. Containerized Execution (Docker Compose)
-To launch the entire platform stack (Web, API, Ingress, and Mail services):
+To launch the complete local platform stack (Web, API, Ingress, and Mail services):
 ```bash
 cd server
 docker compose up -d --build
@@ -199,4 +201,4 @@ OpsHub enforces high software quality standards across all layers:
 
 ## Engineering Craft
 
-OpsHub was designed and developed by **[Ethern-Myth](https://github.com/Ethern-Myth)** as a showcase of clean code craft, cloud-native operational readiness, and enterprise engineering best practices.
+OpsHub was designed and developed by **[Ethern-Myth](https://github.com/Ethern-Myth)** as an engineering showcase of clean code craft, cloud-native operational patterns, and enterprise engineering practices. It is intentionally presented as a source-first system rather than a hosted SaaS product: the repository is the primary artifact, allowing the architecture, implementation, security model, containerization, and Kubernetes configuration to be inspected and run directly.
